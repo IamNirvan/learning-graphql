@@ -46,6 +46,35 @@ const resolvers = {
         author(parent) {
             return db.authors.find((author) => author.id === parent.author_id)
         }
+    },
+
+    Mutation: {
+        addGame(_, args) {
+            let newGame = {
+                ...args.game,
+                id: db.games.length
+            }
+            console.log('adding game: ', newGame);
+            db.games.push(newGame)
+            return newGame
+        },
+
+        deleteGame(_, args) {
+            db.games = db.games.filter((game) => game.id !== args.id)
+            console.log('Deleted game with id ', args.id);
+            return db.games
+        },
+
+        updateGame(_, args) {
+            db.games = db.games.map((game) => {
+                if (game.id === args.id) {
+                    return {...game, ...args.edits} // This overrides the old fields (...game) with the new field(s) (...args.edits)
+                }
+                return game
+            })
+
+            return db.games.find((game) => game.id === args.id)
+        }
     }
 
 }
