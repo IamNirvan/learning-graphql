@@ -1,8 +1,7 @@
 import { ApolloServer } from "@apollo/server"; // To startup apollo server
 import { startStandaloneServer } from "@apollo/server/standalone"
-// Type definitions
-import  typeDefs  from "./schema.js";
-import  resolvers  from "./resolvers.js"
+import typeDefs from "./schema.js";
+import resolvers from "./resolvers.js"
 
 // Setup server
 const port = 4000
@@ -18,4 +17,5 @@ const { url } = await startStandaloneServer(server, {
     listen: { port:port }
 })
 
-console.log('server reader at port ', port);
+console.log('service started...'); 
+console.log('graphql server listening at port ', port);
