@@ -1,4 +1,4 @@
-export const typeDefs = `#graphql
+const typeDefs = `#graphql
     type Game {
         id: ID!
         title: String!
@@ -20,7 +20,9 @@ export const typeDefs = `#graphql
     # Need to have a query type. Defines the entry points to the graph and the values that can be returned...
     type Query {
         reviews: [Review]
-        games: [Games]
+        games: [Game]
         authors: [Author]
     }
 `
+
+export default typeDefs
