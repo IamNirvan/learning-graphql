@@ -1,0 +1,1 @@
+GraphQL server (Apollo) integration into a TypeScript project
