@@ -18,8 +18,9 @@ const resolvers = {
         review(_: any, args: any){
             return db.reviews.find((review) => review.id == args.id)
         },
-        authors() {
+        authors(parent: any, args: any, context: any, info: any) {
             // Send authors from the db. Apollo will handle providing the exact field from the data the user has is requesting
+            console.log(context);
             return db.authors
         },
         author(_:any , args: any) {
