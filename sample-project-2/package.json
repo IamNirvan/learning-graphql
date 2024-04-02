@@ -1,18 +1,18 @@
 {
-  "name": "graphql-server-with-typescript",
-  "description": "A simple GraphQL server with TypeScript",
+  "name": "sample-project-2",
   "version": "1.0.0",
-  "private": true,
+  "description": "",
+  "main": "index.ts",
   "type": "module",
+  "scripts": {
+    "compile" : "npx tsc",
+    "start": "npm run compile && node ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.12.2",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
     "typescript": "^5.4.3"
-  },
-  "scripts": {
-    "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js"
   }
 }
