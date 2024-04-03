@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Sample graphQL projetc",
   "main": "src/app.ts",
+  "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "npx tsc",
