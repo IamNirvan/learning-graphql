@@ -1,0 +1,76 @@
+type ResourceType {
+    id: ID!
+	name: String!
+	displayName: String!
+	resources: [Resource!]
+	fields: [ResourceTypeFields!]
+}
+
+type ResourceTypeField {	
+	id: ID!
+	name: String!
+	displayName: String!
+	dataType: String!
+	value: String!
+}
+
+type Resource {
+	id: ID!
+	name: String!
+	resourceType: ResourceType!
+	scheme: String!
+	references: [ResourceReference!]
+	fields: [ResourceField!]
+}
+
+type ResourceField {
+	id: ID!
+	name: String!
+	displayName: String!
+	dataType: String!
+	value: String!
+}
+
+type ResourceReference {
+	id: ID!
+	epc: String!
+	resource: Resource!
+	statusHistory: [String!]
+	snapshotHistory: [String!]
+	printed: Boolean!
+}
+
+type ItemField {
+	id: ID!
+	name: String!
+	displayName: String!
+	dataType: String!
+	value: String!
+}
+
+interface Item {
+	id: ID!
+	epc: String!
+    fields: [ItemField!]!
+    resource: Resource!
+    status: String!
+    eventHistory: [String!]!
+}
+
+
+
+Query: {
+    items: [Items!]!
+}
+
+
+
+** Everything is tenant wise **
+- Gets all item data
+	Item attributes
+	Current status
+	Event history
+
+- Get all items based on status
+- Get all items based on resource
+- Get all items based on resource type

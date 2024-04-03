@@ -1,93 +1,52 @@
-import { GraphQLError } from 'graphql'
-import db from '../../data/db.js'
+import resourceData from '../../data/resourceData.js'
 
-// Make resolvers for all the fields in the root of the Query type
 const resolvers = {
     Query: {
-        games() {
-            // Send games from the db. Apollo will handle providing the exact field from the data the user has is requesting
-            return db.games
+        resourceTypes() {
+            return resourceData.resourceTypes;
         },
-        game(_: any, args:any) {
-            return db.games.find((game) => game.id === args.id)
+        resources() {
+            return resourceData.resources;
         },
-        reviews() {
-            // Send revires from the db. Apollo will handle providing the exact field from the data the user has is requesting
-            return db.reviews
-        },
-        // parent, args, context
-        review(_: any, args: any){
-            return db.reviews.find((review) => review.id == args.id)
-        },
-        authors(parent: any, args: any, context: any, info: any) {
-            // Send authors from the db. Apollo will handle providing the exact field from the data the user has is requesting
-            console.log(context);
-            return db.authors
-        },
-        author(_:any , args: any) {
-            if (args.id < 1) {
-                throw new GraphQLError("Invalid author id", {
-                    extensions: {
-                      code: "BAD_USER_INPUT",  
-                      argumentName: "id",
-                      value: args.id,
-                    },
-                }) 
-            }
-            return db.authors.find((author) => author.id === args.id)
+        items() {
+            return resourceData.items;
         }
     },
-
-    Game: {
-        reviews(parent: any) {
-            return db.reviews.filter((review) => review.game_id === parent.id)
+    //
+    // Resource Type
+    //
+    ResourceType: {
+        resources: (parent: any) => {
+            return resourceData.resources.filter(resource => resource.resourceType === parent.id);
+        },
+        items: (parent: any) => {
+            let resources =  resourceData.resources.filter(resource => resource.resourceType === parent.id);
+            let items = resourceData.items.filter(item => resources.some(resource => resource.id === item.resource));
+            return items;
         }
     },
-
-    Author: {
-        reviews(parent: any) {
-            return db.reviews.filter((review) => review.author_id === parent.id)
+    //
+    // Resource
+    //
+    Resource: {
+        resourceType: (parent: any) => {
+            return resourceData.resourceTypes.find(resourceType => resourceType.id === parent.resourceType);
+        },
+        items: (parent: any) => {
+            return resourceData.items.filter(item => item.resource === parent.id);
         }
     },
-
-    Review: {
-        game(parent: any) {
-            return db.games.find((game) => game.id === parent.game_id)
+    //
+    // Item
+    //
+    Item: {
+        resource: (parent: any) => {
+            return resourceData.resources.find(resource => resource.id === parent.resource);
         },
-        author(parent: any) {
-            return db.authors.find((author) => author.id === parent.author_id)
-        }
-    },
-
-    Mutation: {
-        addGame(_: any, args: any) {
-            let newGame = {
-                ...args.game,
-                id: db.games.length
-            }
-            console.log('adding game: ', newGame);
-            db.games.push(newGame)
-            return newGame
-        },
-
-        deleteGame(_: any, args: any) {
-            db.games = db.games.filter((game) => game.id !== args.id)
-            console.log('Deleted game with id ', args.id);
-            return db.games
-        },
-
-        updateGame(_: any, args: any) {
-            db.games = db.games.map((game) => {
-                if (game.id === args.id) {
-                    return {...game, ...args.edits} // This overrides the old fields (...game) with the new field(s) (...args.edits)
-                }
-                return game
-            })
-
-            return db.games.find((game) => game.id === args.id)
+        fields: (parent: any) => {
+            return resourceData.itemFields.filter(field => field.item === parent.id);
         }
     }
-
 }
 
 export default resolvers;

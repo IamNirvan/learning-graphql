@@ -1,5 +1,4 @@
 export interface IGraphQLServer {
-    readonly port: number;
     readonly typeDefs: any;
     readonly resolvers: any;
 

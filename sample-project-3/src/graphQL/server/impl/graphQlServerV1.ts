@@ -1,7 +1,8 @@
 import { ApolloServer, BaseContext } from '@apollo/server';
 import { startStandaloneServer } from "@apollo/server/standalone"
-import { IGraphQLServer } from "../IGraphQLServer";
-import { Context } from "../../context/Context";
+import { IGraphQLServer } from "../IGraphQLServer.js";
+import { Context } from "../../context/Context.js";
+import { CustomPlugin } from '../../plugins/CustomPlugin.js';
 
 /**
  * This implementation uses a standalone server. Not a middleware
@@ -29,6 +30,9 @@ export class GraphQLServerVersion1 implements IGraphQLServer {
             typeDefs: this.typeDefs,
             resolvers: this.resolvers,
             includeStacktraceInErrorResponses: false,
+            plugins: [
+                new CustomPlugin()
+            ]
         });
         return result
     }
@@ -38,9 +42,10 @@ export class GraphQLServerVersion1 implements IGraphQLServer {
      * @returns A Promise that resolves to the context object.
      */
     private async _createContext(): Promise<Context> {
-        return {
-            dbConnection: "mongodb://localhost:27017"
+        const context = {
+            dbConnection: "mongodb://localhost:27017",
         }
+        return context;
     }
 
     async start(): Promise<void> {
