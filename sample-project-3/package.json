@@ -1,0 +1,22 @@
+{
+  "name": "sample-project-3",
+  "version": "1.0.0",
+  "description": "Sample graphQL projetc",
+  "main": "src/app.ts",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "compile": "npx tsc",
+    "start": "npm run compile && node dist/app.js"
+  },
+  "keywords": [],
+  "author": "Shalin Kulawardane",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.3",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "graphql": "^16.8.1"
+  }
+}

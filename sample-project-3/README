@@ -1,0 +1,4 @@
+### Dependency import commands
+- npm install typescript --save-dev
+- npm install @apollo/server graphql
+- npm install --save-dev typescript @types/node
