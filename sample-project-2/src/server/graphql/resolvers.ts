@@ -1,4 +1,9 @@
+import { GraphQLError } from 'graphql'
 import db from '../../data/db.js'
+import { MaxFetchReachedError } from '../../errors/MaxFetchReachedError.js'
+
+const maxFetchCount: number = 3;
+let currentFetchCount: number = 0;
 
 // Make resolvers for all the fields in the root of the Query type
 const resolvers = {
@@ -24,6 +29,21 @@ const resolvers = {
             return db.authors
         },
         author(_:any , args: any) {
+            if (args.id < 1) {
+                throw new GraphQLError("Invalid author id", {
+                    extensions: {
+                      code: "BAD_USER_INPUT",  
+                      argumentName: "id",
+                      value: args.id,
+                    },
+                }) 
+            }
+
+            if (currentFetchCount == maxFetchCount) {
+                throw new MaxFetchReachedError("You have reached your fetch limit")
+            }
+    
+            currentFetchCount += 1;
             return db.authors.find((author) => author.id === args.id)
         }
     },
