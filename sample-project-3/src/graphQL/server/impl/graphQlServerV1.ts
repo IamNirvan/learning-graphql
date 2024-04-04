@@ -3,7 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone"
 import { IGraphQLServer } from "../IGraphQLServer.js";
 import { Context } from "../../context/Context.js";
 import { CustomPlugin } from '../../plugins/CustomPlugin.js';
-import { FruitAPI } from '../../dataloader/impl/FruitAPIDataLoader.js';
+import { FruitAPI } from '../../dataloader/FruitAPIDataLoader.js';
 
 /**
  * This implementation uses a standalone server. Not a middleware

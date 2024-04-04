@@ -1,4 +1,4 @@
-import { FruitAPI } from "../dataloader/impl/FruitAPIDataLoader";
+import { FruitAPI } from "../dataloader/FruitAPIDataLoader";
 
 export interface Context {
     dbConnection: string;

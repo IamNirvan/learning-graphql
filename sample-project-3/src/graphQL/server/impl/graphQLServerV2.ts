@@ -4,7 +4,7 @@ import { IGraphQLServer } from "../IGraphQLServer.js";
 import { Context } from "../../context/Context.js";
 import { CustomPlugin } from '../../plugins/CustomPlugin.js';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { FruitAPI } from '../../dataloader/impl/FruitAPIDataLoader.js';
+import { FruitAPI } from '../../dataloader/FruitAPIDataLoader.js';
 
 /**
  * This implementation uses the middleware approach
