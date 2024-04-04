@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "description": "Sample graphQL projetc",
   "main": "src/app.ts",
-  "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "npx tsc",
-    "start": "npm run compile && node dist/app.js"
+    "start": "npm run compile && node dist/app.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
   },
   "keywords": [],
   "author": "Shalin Kulawardane",
   "license": "ISC",
   "devDependencies": {
+    "@types/express-session": "^1.18.0",
     "@types/node": "^20.12.3",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.3"
   },
   "dependencies": {
@@ -22,6 +24,8 @@
     "@types/cors": "^2.8.17",
     "axios": "^1.6.8",
     "express": "^4.19.2",
-    "graphql": "^16.8.1"
+    "express-session": "^1.18.0",
+    "graphql": "^16.8.1",
+    "keycloak-connect": "^23.0.7"
   }
 }

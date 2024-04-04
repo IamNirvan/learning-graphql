@@ -1,4 +1,4 @@
-import resourceData from '../../data/resourceData.js'
+import resourceData from '../../data/resourceData'
 import { Context } from '../context/Context';
 
 const resolvers = {

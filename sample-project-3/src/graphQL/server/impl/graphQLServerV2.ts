@@ -1,10 +1,10 @@
 import { ApolloServer, BaseContext } from '@apollo/server';
 import { startStandaloneServer } from "@apollo/server/standalone"
-import { IGraphQLServer } from "../IGraphQLServer.js";
-import { Context } from "../../context/Context.js";
-import { CustomPlugin } from '../../plugins/CustomPlugin.js';
+import { IGraphQLServer } from "../IGraphQLServer";
+import { Context } from "../../context/Context";
+// import { CustomPlugin } from '../../plugins/CustomPlugin.js';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { FruitAPI } from '../../dataloader/FruitAPIDataLoader.js';
+import { FruitAPI } from '../../dataloader/FruitAPIDataLoader';
 
 /**
  * This implementation uses the middleware approach
