@@ -17,6 +17,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@apollo/datasource-rest": "^6.2.2",
     "@apollo/server": "^4.10.2",
     "@types/cors": "^2.8.17",
     "axios": "^1.6.8",

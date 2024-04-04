@@ -35,11 +35,27 @@ const typeDefs = `#graphql
         fields: [ItemField!]
         tenant: Int!
     }
+
+    type Fruit {
+        name: String!
+        family: String!
+        order: String!
+        genus: String!
+        nutritions: Nutritions!
+    }
     
+    type Nutritions {
+        calories: Float!
+        fat: Float!
+        protein: Float!
+        carbs: Float!
+    }
+
     type Query {
         resourceTypes: [ResourceType!]
         resources: [Resource!]
         items: [Item!]
+        fruit(name: String!): Fruit
     }
 `
  

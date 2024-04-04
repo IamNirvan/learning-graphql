@@ -1,4 +1,5 @@
 import resourceData from '../../data/resourceData.js'
+import { Context } from '../context/Context';
 
 const resolvers = {
     Query: {
@@ -10,6 +11,30 @@ const resolvers = {
         },
         items() {
             return resourceData.items;
+        },
+        async fruit(parent:any, args:any, context: Context) {
+            let result = null;
+            
+            // Use the context to access the FruitAPI instance
+            // Fetch data via the FruitAPI instance
+            let fruitRes:Promise<any> = await context.fruitApi.getFruitInfo(args.name);
+            
+            // Create resulting object
+            result = {
+                name: (await fruitRes).name,
+                family: (await fruitRes).family,
+                order: (await fruitRes).order,
+                genus: (await fruitRes).genus,
+                nutritions: {
+                    calories: (await fruitRes).nutritions.calories,
+                    fat: (await fruitRes).nutritions.fat,
+                    protein: (await fruitRes).nutritions.protein,
+                    carbs: (await fruitRes).nutritions.carbohydrates
+                }
+            };
+
+            // Return object
+            return result;
         }
     },
     //

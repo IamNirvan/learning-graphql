@@ -25,3 +25,7 @@ app.use(
 const port = 4000;
 await new Promise<void>((resolve) => httpServer.listen({ port: port }, resolve));
 console.log(`server started at http://localhost:${port}/graphql`);
+
+
+// const api = new FruitAPI();
+// api.getFruitInfo("apple").then(res => console.log(res));

@@ -3,6 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone"
 import { IGraphQLServer } from "../IGraphQLServer.js";
 import { Context } from "../../context/Context.js";
 import { CustomPlugin } from '../../plugins/CustomPlugin.js';
+import { FruitAPI } from '../../dataloader/impl/FruitAPIDataLoader.js';
 
 /**
  * This implementation uses a standalone server. Not a middleware
@@ -44,6 +45,7 @@ export class GraphQLServerVersion1 implements IGraphQLServer {
     private async _createContext(): Promise<Context> {
         const context = {
             dbConnection: "mongodb://localhost:27017",
+            fruitApi: new FruitAPI(),
         }
         return context;
     }

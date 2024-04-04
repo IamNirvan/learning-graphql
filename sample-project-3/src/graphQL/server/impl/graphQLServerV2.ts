@@ -4,6 +4,7 @@ import { IGraphQLServer } from "../IGraphQLServer.js";
 import { Context } from "../../context/Context.js";
 import { CustomPlugin } from '../../plugins/CustomPlugin.js';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { FruitAPI } from '../../dataloader/impl/FruitAPIDataLoader.js';
 
 /**
  * This implementation uses the middleware approach
@@ -30,7 +31,7 @@ export class GraphQLServerVersion2 implements IGraphQLServer {
         let result =  new ApolloServer<Context>({
             typeDefs: this.typeDefs,
             resolvers: this.resolvers,
-            includeStacktraceInErrorResponses: false,
+            // includeStacktraceInErrorResponses: false,
             plugins: [
                 ApolloServerPluginDrainHttpServer({ httpServer: this.httpServer })
             ]
@@ -45,6 +46,7 @@ export class GraphQLServerVersion2 implements IGraphQLServer {
     async createContext(): Promise<Context> {
         const context = {
             dbConnection: "mongodb://localhost:27017",
+            fruitApi: new FruitAPI(),
         }
         return context;
     }
