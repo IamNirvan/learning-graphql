@@ -1,5 +1,6 @@
 import resourceData from '../../data/resourceData'
 import { Context } from '../context/Context';
+import { ForbiddenError } from '../errors/ForbiddenError';
 
 const resolvers = {
     Query: {
@@ -14,7 +15,16 @@ const resolvers = {
         },
         async fruit(parent:any, args:any, context: Context) {
             let result = null;
-            
+
+            /**
+             * TIP:
+             * Can implement client-id based authorization like this by check the client-id in the context 
+             * and throwing a ForbiddenError if the client-id is not authorized
+             */
+            if (context.clientId && context.clientId !== 'api-service') {
+                throw new ForbiddenError(`unauthorized client: ${context.clientId}`)
+            }
+
             // Use the context to access the FruitAPI instance
             // Fetch data via the FruitAPI instance
             let fruitRes:Promise<any> = await context.fruitApi.getFruitInfo(args.name);
