@@ -1,15 +1,10 @@
 import resolvers from "./graphQL/resolvers/resolver.js";
 import typeDefs from "./graphQL/schemas/schema.js";
-import { IGraphQLServer } from "./graphQL/server/IGraphQLServer.js";
 import { GraphQLServerVersion2 } from "./graphQL/server/impl/graphQLServerV2.js";
 import { expressMiddleware } from '@apollo/server/express4';
-
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-// const server: IGraphQLServer = new GraphQLServerVersion1(4000, typeDefs, resolvers)
-// server.start()
-
 
 const app = express();
 const httpServer = http.createServer(app);
